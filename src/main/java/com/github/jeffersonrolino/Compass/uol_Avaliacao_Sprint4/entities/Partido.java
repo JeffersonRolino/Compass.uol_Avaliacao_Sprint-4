@@ -1,9 +1,9 @@
-package com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.model;
+package com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos.PartidoDTO;
+import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.enums.Ideologia;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -13,6 +13,8 @@ public class Partido {
     private Long id;
     private String nome;
     private String sigla;
+
+    @Enumerated(EnumType.STRING)
     private Ideologia ideologia;
     private LocalDate dataFundacao;
 
@@ -23,6 +25,21 @@ public class Partido {
         this.sigla = sigla;
         this.ideologia = ideologia;
         this.dataFundacao = dataFundacao;
+    }
+
+    public Partido(Long id, String nome, String sigla, Ideologia ideologia, LocalDate dataFundacao) {
+        this.id = id;
+        this.nome = nome;
+        this.sigla = sigla;
+        this.ideologia = ideologia;
+        this.dataFundacao = dataFundacao;
+    }
+
+    public Partido(PartidoDTO partidoDTO){
+        this.nome = partidoDTO.getNome();
+        this.sigla = partidoDTO.getSigla();
+        this.ideologia = partidoDTO.getIdeologia();
+        this.dataFundacao = partidoDTO.getDataFundacao();
     }
 
     public Long getId() {
@@ -43,21 +60,5 @@ public class Partido {
 
     public LocalDate getDataFundacao() {
         return dataFundacao;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setSigla(String sigla) {
-        this.sigla = sigla;
-    }
-
-    public void setIdeologia(Ideologia ideologia) {
-        this.ideologia = ideologia;
-    }
-
-    public void setDataFundacao(LocalDate dataFundacao) {
-        this.dataFundacao = dataFundacao;
     }
 }

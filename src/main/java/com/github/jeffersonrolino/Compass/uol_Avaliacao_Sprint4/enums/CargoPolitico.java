@@ -1,4 +1,4 @@
-package com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.model;
+package com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.enums;
 
 public enum CargoPolitico {
     VEREADOR("Vereador"),
@@ -9,13 +9,14 @@ public enum CargoPolitico {
     GOVERNADOR("Governador"),
     PRESIDENTE("Presidente");
 
-    private String descricao;
+    private final String descricao;
 
     CargoPolitico(String descricao){
         this.descricao = descricao;
     }
 
-    public String getDescricao(){
+    @Override
+    public String toString() {
         return descricao;
     }
 }

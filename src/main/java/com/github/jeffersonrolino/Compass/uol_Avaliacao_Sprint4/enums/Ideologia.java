@@ -1,17 +1,18 @@
-package com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.model;
+package com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.enums;
 
 public enum Ideologia {
     DIREITA("Direita"),
     CENTRO("Centro"),
     ESQUERDA("Esquerda");
 
-    private String descricao;
+    private final String descricao;
 
     Ideologia(String descricao){
         this.descricao = descricao;
     }
 
-    public String getDescricao(){
+    @Override
+    public String toString() {
         return descricao;
     }
 }
