@@ -23,6 +23,10 @@ public class Associado {
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
+    @ManyToOne
+    private Partido partido;
+
+
 
     public Associado() {
     }

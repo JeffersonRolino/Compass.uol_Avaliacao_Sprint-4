@@ -15,4 +15,18 @@ public enum Ideologia {
     public String toString() {
         return descricao;
     }
+
+    public static Ideologia getPelaDescricao(String descricao){
+        switch (descricao){
+            case "Direita":
+                return Ideologia.DIREITA;
+            case "Centro":
+                return Ideologia.CENTRO;
+            case "Esquerda":
+                return Ideologia.ESQUERDA;
+            default:
+                throw new IllegalArgumentException("Descricao " + descricao + "nao suportada.");
+        }
+    }
+
 }

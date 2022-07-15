@@ -12,7 +12,13 @@ public class PartidoService {
     private PartidoRepository partidoRepository;
 
     public PartidoDTO salvaNovoPartido(PartidoDTO partidoDTO){
-        Partido partidoSalvo = partidoRepository.save(new Partido(partidoDTO));
+        Partido partidoDB = new Partido(partidoDTO);
+
+        PartidoDTO testeString = new PartidoDTO(partidoDB);
+        System.out.println(testeString.formatarData("16/02/2018"));
+        System.out.println(testeString.formatarData("16/02/2018").getClass().getSimpleName());
+
+        Partido partidoSalvo = partidoRepository.save(partidoDB);
         return new PartidoDTO(partidoSalvo);
     }
 }

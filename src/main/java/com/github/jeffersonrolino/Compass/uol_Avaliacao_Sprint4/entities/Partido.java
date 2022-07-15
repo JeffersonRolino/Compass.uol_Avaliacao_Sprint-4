@@ -1,10 +1,12 @@
 package com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos.PartidoDTO;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.enums.Ideologia;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Partido {
@@ -13,9 +15,12 @@ public class Partido {
     private Long id;
     private String nome;
     private String sigla;
-
-    @Enumerated(EnumType.STRING)
     private Ideologia ideologia;
+
+    @OneToMany(mappedBy = "partido")
+    private List<Associado> associados;
+
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate dataFundacao;
 
     public Partido(){};
@@ -39,7 +44,7 @@ public class Partido {
         this.nome = partidoDTO.getNome();
         this.sigla = partidoDTO.getSigla();
         this.ideologia = partidoDTO.getIdeologia();
-        this.dataFundacao = partidoDTO.getDataFundacao();
+        this.dataFundacao = partidoDTO.formatarData(partidoDTO.getDataFundacao());
     }
 
     public Long getId() {
