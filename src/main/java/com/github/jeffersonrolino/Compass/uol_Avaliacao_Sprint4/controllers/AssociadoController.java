@@ -3,6 +3,7 @@ package com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.controllers;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos.AssociadoDTO;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.services.AssociadoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -26,6 +27,11 @@ public class AssociadoController {
     @GetMapping("/{id}")
     public ResponseEntity<AssociadoDTO> retornarAssociadoPorId(@PathVariable() Long id){
         return associadoService.retornaAssociadoPorId(id);
+    }
+
+    @PutMapping("/{id}") @Modifying(clearAutomatically = true)
+    public ResponseEntity<AssociadoDTO> atualizarAssociadoPorId(@PathVariable() Long id, @RequestBody AssociadoDTO associadoDTO){
+        return associadoService.atualizarAssociadoPorId(id, associadoDTO);
     }
 
 }

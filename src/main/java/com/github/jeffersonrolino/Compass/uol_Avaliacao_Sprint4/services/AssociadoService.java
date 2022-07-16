@@ -1,6 +1,7 @@
 package com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.services;
 
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos.AssociadoDTO;
+import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos.PartidoDTO;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.entities.Associado;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.repositories.AssociadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +28,26 @@ public class AssociadoService {
         }
         return ResponseEntity.notFound().build();
     }
+
+    public ResponseEntity<AssociadoDTO> atualizarAssociadoPorId(Long id, AssociadoDTO associadoDTO){
+        Optional<Associado> associadoAlvo = associadoRepository.findById(id);
+        if(associadoAlvo.isPresent()){
+            Associado associado = atualizarAssociado(id, associadoRepository, associadoDTO);
+            associadoRepository.save(associado);
+            return ResponseEntity.ok(new AssociadoDTO(associado));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    public Associado atualizarAssociado(Long id, AssociadoRepository associadoRepository, AssociadoDTO associadoDTO){
+        Associado associado = associadoRepository.getReferenceById(id);
+
+        associado.setNome(associadoDTO.getNome());
+        associado.setCargoPolitico(associadoDTO.getCargoPolitico());
+        associado.setDataNascimento(associadoDTO.formatarData(associadoDTO.getDataNascimento()));
+        associado.setSexo(associadoDTO.getSexo());
+
+        return associado;
+    }
+
 }

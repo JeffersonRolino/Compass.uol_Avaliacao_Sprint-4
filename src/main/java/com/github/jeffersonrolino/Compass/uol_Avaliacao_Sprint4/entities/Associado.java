@@ -70,4 +70,20 @@ public class Associado {
     public Sexo getSexo() {
         return sexo;
     }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCargoPolitico(CargoPolitico cargoPolitico) {
+        this.cargoPolitico = cargoPolitico;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
 }
