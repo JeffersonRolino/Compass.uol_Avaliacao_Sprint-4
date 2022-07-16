@@ -6,6 +6,7 @@ import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.enums.Ideologia;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -65,5 +66,21 @@ public class Partido {
 
     public LocalDate getDataFundacao() {
         return dataFundacao;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setSigla(String sigla) {
+        this.sigla = sigla;
+    }
+
+    public void setIdeologia(Ideologia ideologia) {
+        this.ideologia = ideologia;
+    }
+
+    public void setDataFundacao(LocalDate dataFundacao) {
+        this.dataFundacao = dataFundacao;
     }
 }

@@ -1,5 +1,6 @@
 package com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos;
 
+import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.entities.Associado;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.entities.Partido;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.enums.Ideologia;
 

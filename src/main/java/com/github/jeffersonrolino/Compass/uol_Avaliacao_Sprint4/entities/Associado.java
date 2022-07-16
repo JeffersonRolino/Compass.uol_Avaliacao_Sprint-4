@@ -1,5 +1,6 @@
 package com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.entities;
 
+import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos.AssociadoDTO;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.enums.CargoPolitico;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.enums.Sexo;
 
@@ -15,18 +16,14 @@ public class Associado {
 
     private String nome;
 
-    @Enumerated(EnumType.STRING)
     private CargoPolitico cargoPolitico;
 
     private LocalDate dataNascimento;
 
-    @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
     @ManyToOne
     private Partido partido;
-
-
 
     public Associado() {
     }
@@ -45,6 +42,13 @@ public class Associado {
         this.cargoPolitico = cargoPolitico;
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
+    }
+
+    public Associado(AssociadoDTO associadoDTO) {
+        this.nome = associadoDTO.getNome();
+        this.cargoPolitico = associadoDTO.getCargoPolitico();
+        this.dataNascimento = associadoDTO.formatarData(associadoDTO.getDataNascimento());
+        this.sexo = associadoDTO.getSexo();
     }
 
     public Long getId() {

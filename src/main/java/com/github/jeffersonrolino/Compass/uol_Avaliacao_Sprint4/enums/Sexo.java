@@ -14,4 +14,15 @@ public enum Sexo {
     public String toString() {
         return descricao;
     }
+
+    public static Sexo getPelaDescricao(String descricao){
+        switch (descricao){
+            case "Masculino":
+                return Sexo.MASCULINO;
+            case "Feminino":
+                return Sexo.FEMININO;
+            default:
+                throw new IllegalArgumentException("Descricao " + descricao + "nao suportada.");
+        }
+    }
 }
