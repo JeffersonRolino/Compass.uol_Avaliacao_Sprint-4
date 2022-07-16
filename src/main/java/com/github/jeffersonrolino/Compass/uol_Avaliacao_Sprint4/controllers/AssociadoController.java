@@ -34,4 +34,9 @@ public class AssociadoController {
         return associadoService.atualizarAssociadoPorId(id, associadoDTO);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<AssociadoDTO> deletarAssociadoPorId(@PathVariable Long id){
+        return associadoService.deletarAssociadoPorId(id);
+    }
+
 }

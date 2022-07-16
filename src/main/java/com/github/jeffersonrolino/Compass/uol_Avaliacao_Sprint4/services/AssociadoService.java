@@ -39,6 +39,15 @@ public class AssociadoService {
         return ResponseEntity.notFound().build();
     }
 
+    public ResponseEntity<AssociadoDTO> deletarAssociadoPorId(Long id){
+        Optional<Associado> associadoAlvo = associadoRepository.findById(id);
+        if(associadoAlvo.isPresent()){
+            associadoRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     public Associado atualizarAssociado(Long id, AssociadoRepository associadoRepository, AssociadoDTO associadoDTO){
         Associado associado = associadoRepository.getReferenceById(id);
 
