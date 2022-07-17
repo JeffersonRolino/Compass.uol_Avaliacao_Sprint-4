@@ -1,26 +1,19 @@
 package com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.repositories;
 
-import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos.AssociadoDTO;
-import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos.AssociadoPartidoDTO;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.entities.Associado;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.entities.Partido;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.enums.CargoPolitico;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.enums.Ideologia;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.enums.Sexo;
-import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.services.AssociadoService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 public class AssociadoRepositoryTest {
@@ -31,6 +24,12 @@ public class AssociadoRepositoryTest {
     @Autowired
     private PartidoRepository partidoRepositoryTest;
 
+
+    @AfterEach
+    void deleteTodos(){
+        associadoRepositoryTest.deleteAll();
+        partidoRepositoryTest.deleteAll();
+    }
 
 
     @Test
