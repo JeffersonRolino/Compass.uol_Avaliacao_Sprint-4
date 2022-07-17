@@ -2,6 +2,7 @@ package com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.controllers;
 
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos.AssociadoDTO;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos.AssociadoPartidoDTO;
+import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.enums.CargoPolitico;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.services.AssociadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
@@ -31,13 +32,14 @@ public class AssociadoController {
         return associadoService.vincularAssociadoAPartido(associadoPartidoDTO);
     }
 
-//    @GetMapping
-//    public List<AssociadoDTO> listaAssociados(String cargoPolitico){
-//        if(cargoPolitico != null){
-//            return associadoService.retornaAssociadosPorCargoPolitico(cargoPolitico);
-//        }
-//        return null;
-//    }
+    @GetMapping
+    public List<AssociadoDTO> listaAssociados(String cargoPolitico){
+        if(cargoPolitico != null){
+            CargoPolitico cargoPoliticoResponse = CargoPolitico.getPelaDescricao(cargoPolitico);
+            return associadoService.retornaAssociadosPorCargoPolitico(cargoPoliticoResponse);
+        }
+        return associadoService.retornaAssociados();
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<AssociadoDTO> retornarAssociadoPorId(@PathVariable() Long id){

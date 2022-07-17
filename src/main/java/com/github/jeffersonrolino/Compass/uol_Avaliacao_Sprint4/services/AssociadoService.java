@@ -4,6 +4,7 @@ import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos.AssociadoDT
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos.AssociadoPartidoDTO;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.entities.Associado;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.entities.Partido;
+import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.enums.CargoPolitico;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.repositories.AssociadoRepository;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.repositories.PartidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,13 @@ public class AssociadoService {
         return new AssociadoDTO(associado);
     }
 
-//    public List<AssociadoDTO> retornaAssociadosPorCargoPolitico(String cargoPolitico) {
-//        return associadoRepository.findByCargoPolitico(cargoPolitico).stream().map(AssociadoDTO::new).collect(Collectors.toList());
-//    }
+    public List<AssociadoDTO> retornaAssociadosPorCargoPolitico(CargoPolitico cargoPolitico) {
+        return associadoRepository.findAllByCargoPolitico(cargoPolitico).stream().map(AssociadoDTO::new).collect(Collectors.toList());
+    }
+
+    public List<AssociadoDTO> retornaAssociados() {
+        return associadoRepository.findAll().stream().map(AssociadoDTO::new).collect(Collectors.toList());
+    }
 
     public ResponseEntity<AssociadoDTO> retornaAssociadoPorId(Long id){
         Optional<Associado> associado = associadoRepository.findById(id);
