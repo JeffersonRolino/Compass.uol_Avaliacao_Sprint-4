@@ -8,6 +8,7 @@ import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.enums.CargoPolit
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.repositories.AssociadoRepository;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.repositories.PartidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -115,5 +116,9 @@ public class AssociadoService {
         associado.setPartido(null);
 
         return associado;
+    }
+
+    public List<AssociadoDTO> retornaAssociadosOrdenadosPorNome() {
+        return associadoRepository.findAll(Sort.by(Sort.Direction.ASC, "nome")).stream().map(AssociadoDTO::new).collect(Collectors.toList());
     }
 }

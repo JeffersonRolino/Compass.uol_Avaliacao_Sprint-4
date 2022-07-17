@@ -33,12 +33,17 @@ public class AssociadoController {
     }
 
     @GetMapping
-    public List<AssociadoDTO> listaAssociados(String cargoPolitico){
+    public List<AssociadoDTO> listaAssociados(String cargoPolitico, boolean ordernarPorNome){
         if(cargoPolitico != null){
             CargoPolitico cargoPoliticoResponse = CargoPolitico.getPelaDescricao(cargoPolitico);
             return associadoService.retornaAssociadosPorCargoPolitico(cargoPoliticoResponse);
         }
-        return associadoService.retornaAssociados();
+        else if(ordernarPorNome){
+            return associadoService.retornaAssociadosOrdenadosPorNome();
+        }
+        else {
+            return associadoService.retornaAssociados();
+        }
     }
 
     @GetMapping("/{id}")
