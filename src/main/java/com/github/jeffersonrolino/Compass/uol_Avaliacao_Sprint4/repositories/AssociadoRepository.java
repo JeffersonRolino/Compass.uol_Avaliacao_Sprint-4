@@ -1,5 +1,6 @@
 package com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.repositories;
 
+import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos.AssociadoDTO;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.entities.Associado;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,4 +17,6 @@ public interface AssociadoRepository extends JpaRepository<Associado, Long > {
 //    List<Associado> retornaPorCargoPolitico(String cargoPolitico);
 
 //    List<Associado> findByCargoPolitico(String cargoPolitico);
+
+    List<Associado> findAllByPartido_Id(Long id);
 }
