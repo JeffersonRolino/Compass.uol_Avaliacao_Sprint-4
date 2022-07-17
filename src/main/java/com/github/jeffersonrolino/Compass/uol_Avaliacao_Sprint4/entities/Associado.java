@@ -23,6 +23,7 @@ public class Associado {
     private Sexo sexo;
 
     @ManyToOne
+    @JoinColumn(name = "partido_id")
     private Partido partido;
 
     public Associado() {
@@ -85,5 +86,9 @@ public class Associado {
 
     public void setSexo(Sexo sexo) {
         this.sexo = sexo;
+    }
+
+    public void setPartido(Partido partido) {
+        this.partido = partido;
     }
 }

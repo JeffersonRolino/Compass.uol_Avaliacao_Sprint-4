@@ -1,9 +1,12 @@
 package com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.services;
 
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos.AssociadoDTO;
+import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos.AssociadoPartidoDTO;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos.PartidoDTO;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.entities.Associado;
+import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.entities.Partido;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.repositories.AssociadoRepository;
+import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.repositories.PartidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,6 +17,9 @@ import java.util.Optional;
 public class AssociadoService {
     @Autowired
     private AssociadoRepository associadoRepository;
+
+    @Autowired
+    private PartidoRepository partidoRepository;
 
     public AssociadoDTO salvaNovoAssociado(AssociadoDTO associadoDTO){
         Associado associado = new Associado(associadoDTO);
@@ -39,6 +45,17 @@ public class AssociadoService {
         return ResponseEntity.notFound().build();
     }
 
+    public ResponseEntity<AssociadoDTO> vincularAssociadoAPartido(AssociadoPartidoDTO associadoPartidoDTO){
+        Optional<Associado> associadoAlvo = associadoRepository.findById(associadoPartidoDTO.getIdAssociado());
+        Optional<Partido> partidoAlvo = partidoRepository.findById(associadoPartidoDTO.getIdPartido());
+        if(associadoAlvo.isPresent() && partidoAlvo.isPresent()){
+            Associado associado = vincularAssociado(associadoPartidoDTO, associadoRepository, partidoRepository);
+            associadoRepository.save(associado);
+            return ResponseEntity.ok(new AssociadoDTO(associado));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     public ResponseEntity<AssociadoDTO> deletarAssociadoPorId(Long id){
         Optional<Associado> associadoAlvo = associadoRepository.findById(id);
         if(associadoAlvo.isPresent()){
@@ -58,5 +75,18 @@ public class AssociadoService {
 
         return associado;
     }
+
+    public Associado vincularAssociado(AssociadoPartidoDTO associadoPartidoDTO, AssociadoRepository associadoRepository, PartidoRepository partidoRepository){
+        Associado associado = associadoRepository.getReferenceById(associadoPartidoDTO.getIdAssociado());
+        Partido partido = partidoRepository.getReferenceById(associadoPartidoDTO.getIdPartido());
+
+        AssociadoDTO associadoDTO = new AssociadoDTO(associado);
+
+        associado.setPartido(partido);
+
+        return associado;
+    }
+
+
 
 }

@@ -1,6 +1,7 @@
 package com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.controllers;
 
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos.AssociadoDTO;
+import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos.AssociadoPartidoDTO;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.services.AssociadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
@@ -22,6 +23,11 @@ public class AssociadoController {
         AssociadoDTO associadoDTO = associadoService.salvaNovoAssociado(associado);
         URI uri = uriComponentsBuilder.path("/associados/{id}").buildAndExpand(associado.getId()).toUri();
         return ResponseEntity.created(uri).body(associadoDTO);
+    }
+
+    @PostMapping("/partidos")
+    public ResponseEntity<AssociadoDTO> vincularAssociadoAPartido(@RequestBody AssociadoPartidoDTO associadoPartidoDTO, UriComponentsBuilder uriComponentsBuilder){
+        return associadoService.vincularAssociadoAPartido(associadoPartidoDTO);
     }
 
     @GetMapping("/{id}")
