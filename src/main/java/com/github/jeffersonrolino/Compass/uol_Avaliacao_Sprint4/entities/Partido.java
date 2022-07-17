@@ -68,6 +68,10 @@ public class Partido {
         return dataFundacao;
     }
 
+    public List<Associado> getAssociados() {
+        return associados;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -82,5 +86,9 @@ public class Partido {
 
     public void setDataFundacao(LocalDate dataFundacao) {
         this.dataFundacao = dataFundacao;
+    }
+
+    public void adicionarAssociado(Associado associado) {
+        this.associados.add(associado);
     }
 }

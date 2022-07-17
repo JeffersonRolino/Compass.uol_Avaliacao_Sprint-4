@@ -45,4 +45,9 @@ public class AssociadoController {
         return associadoService.deletarAssociadoPorId(id);
     }
 
+    @DeleteMapping("/{associadoId}/partidos/{partidoId}")
+    public ResponseEntity<AssociadoDTO> desvincularAssociadoDePartido(@PathVariable Long associadoId, @PathVariable Long partidoId){
+        return associadoService.desvincularAssociadoAPartido(associadoId, partidoId);
+    }
+
 }

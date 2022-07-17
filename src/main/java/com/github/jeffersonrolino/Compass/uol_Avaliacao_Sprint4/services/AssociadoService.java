@@ -2,7 +2,6 @@ package com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.services;
 
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos.AssociadoDTO;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos.AssociadoPartidoDTO;
-import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos.PartidoDTO;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.entities.Associado;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.entities.Partido;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.repositories.AssociadoRepository;
@@ -51,10 +50,23 @@ public class AssociadoService {
         if(associadoAlvo.isPresent() && partidoAlvo.isPresent()){
             Associado associado = vincularAssociado(associadoPartidoDTO, associadoRepository, partidoRepository);
             associadoRepository.save(associado);
+
             return ResponseEntity.ok(new AssociadoDTO(associado));
         }
         return ResponseEntity.notFound().build();
     }
+
+    public ResponseEntity<AssociadoDTO> desvincularAssociadoAPartido(Long associadoId, Long partidoId){
+        Optional<Associado> associadoAlvo = associadoRepository.findById(associadoId);
+        Optional<Partido> partidoAlvo = partidoRepository.findById(partidoId);
+        if(associadoAlvo.isPresent() && partidoAlvo.isPresent()){
+            Associado associado = desvincularAssociado(associadoId);
+            associadoRepository.save(associado);
+            return ResponseEntity.ok(new AssociadoDTO(associado));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 
     public ResponseEntity<AssociadoDTO> deletarAssociadoPorId(Long id){
         Optional<Associado> associadoAlvo = associadoRepository.findById(id);
@@ -80,9 +92,16 @@ public class AssociadoService {
         Associado associado = associadoRepository.getReferenceById(associadoPartidoDTO.getIdAssociado());
         Partido partido = partidoRepository.getReferenceById(associadoPartidoDTO.getIdPartido());
 
-        AssociadoDTO associadoDTO = new AssociadoDTO(associado);
-
         associado.setPartido(partido);
+        partido.adicionarAssociado(associado);
+
+        return associado;
+    }
+
+    public Associado desvincularAssociado(Long associadoId){
+        Associado associado = associadoRepository.getReferenceById(associadoId);
+
+        associado.setPartido(null);
 
         return associado;
     }
