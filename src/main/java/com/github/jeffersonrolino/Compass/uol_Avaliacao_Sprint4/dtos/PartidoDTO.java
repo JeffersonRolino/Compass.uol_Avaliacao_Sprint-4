@@ -3,14 +3,24 @@ package com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.dtos;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.entities.Partido;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.enums.Ideologia;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class PartidoDTO {
     private Long id;
+
+    @NotNull @NotEmpty
     private String nome;
+
+    @NotNull @NotEmpty
     private String sigla;
+
+    @NotNull
     private Ideologia ideologia;
+
+    @NotNull @NotEmpty
     private String dataFundacao;
 
     public PartidoDTO(){}

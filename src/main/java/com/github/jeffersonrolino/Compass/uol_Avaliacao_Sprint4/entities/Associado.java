@@ -72,6 +72,10 @@ public class Associado {
         return sexo;
     }
 
+    public Partido getPartido() {
+        return partido;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }

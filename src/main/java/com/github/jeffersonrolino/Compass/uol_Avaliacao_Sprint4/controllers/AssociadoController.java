@@ -29,7 +29,7 @@ public class AssociadoController {
     }
 
     @PostMapping("/partidos")
-    public ResponseEntity<AssociadoDTO> vincularAssociadoAPartido(@RequestBody AssociadoPartidoDTO associadoPartidoDTO, UriComponentsBuilder uriComponentsBuilder){
+    public ResponseEntity<AssociadoDTO> vincularAssociadoAPartido(@RequestBody @Valid AssociadoPartidoDTO associadoPartidoDTO, UriComponentsBuilder uriComponentsBuilder){
         return associadoService.vincularAssociadoAPartido(associadoPartidoDTO);
     }
 

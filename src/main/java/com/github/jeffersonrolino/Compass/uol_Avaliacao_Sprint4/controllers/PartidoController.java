@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class PartidoController {
     private PartidoService partidoService;
 
     @PostMapping
-    public ResponseEntity<PartidoDTO> salvarNovoPartido(@RequestBody PartidoDTO partido, UriComponentsBuilder uriComponentsBuilder){
+    public ResponseEntity<PartidoDTO> salvarNovoPartido(@RequestBody @Valid PartidoDTO partido, UriComponentsBuilder uriComponentsBuilder){
         PartidoDTO partidoDTO = partidoService.salvaNovoPartido(partido);
         URI uri = uriComponentsBuilder.path("/partidos/{id}").buildAndExpand(partido.getId()).toUri();
         return ResponseEntity.created(uri).body(partidoDTO);

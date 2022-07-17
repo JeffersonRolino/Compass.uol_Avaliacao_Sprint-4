@@ -25,6 +25,13 @@ public class Partido {
 
     public Partido(){}
 
+    public Partido(String nome, String sigla, Ideologia ideologia, LocalDate dataFundacao) {
+        this.nome = nome;
+        this.sigla = sigla;
+        this.ideologia = ideologia;
+        this.dataFundacao = dataFundacao;
+    }
+
     public Partido(PartidoDTO partidoDTO){
         this.nome = partidoDTO.getNome();
         this.sigla = partidoDTO.getSigla();
