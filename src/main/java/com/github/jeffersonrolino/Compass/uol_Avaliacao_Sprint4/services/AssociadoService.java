@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AssociadoService {
@@ -25,6 +27,10 @@ public class AssociadoService {
         associadoRepository.save(associado);
         return new AssociadoDTO(associado);
     }
+
+//    public List<AssociadoDTO> retornaAssociadosPorCargoPolitico(String cargoPolitico) {
+//        return associadoRepository.findByCargoPolitico(cargoPolitico).stream().map(AssociadoDTO::new).collect(Collectors.toList());
+//    }
 
     public ResponseEntity<AssociadoDTO> retornaAssociadoPorId(Long id){
         Optional<Associado> associado = associadoRepository.findById(id);
@@ -105,7 +111,4 @@ public class AssociadoService {
 
         return associado;
     }
-
-
-
 }

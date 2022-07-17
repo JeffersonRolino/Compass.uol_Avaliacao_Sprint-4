@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/associados")
@@ -29,6 +30,14 @@ public class AssociadoController {
     public ResponseEntity<AssociadoDTO> vincularAssociadoAPartido(@RequestBody AssociadoPartidoDTO associadoPartidoDTO, UriComponentsBuilder uriComponentsBuilder){
         return associadoService.vincularAssociadoAPartido(associadoPartidoDTO);
     }
+
+//    @GetMapping
+//    public List<AssociadoDTO> listaAssociados(String cargoPolitico){
+//        if(cargoPolitico != null){
+//            return associadoService.retornaAssociadosPorCargoPolitico(cargoPolitico);
+//        }
+//        return null;
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<AssociadoDTO> retornarAssociadoPorId(@PathVariable() Long id){
