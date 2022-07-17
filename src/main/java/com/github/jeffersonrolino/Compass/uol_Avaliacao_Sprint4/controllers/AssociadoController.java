@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class AssociadoController {
     AssociadoService associadoService;
 
     @PostMapping
-    public ResponseEntity<AssociadoDTO> salvarNovoAssociado(@RequestBody AssociadoDTO associado, UriComponentsBuilder uriComponentsBuilder){
+    public ResponseEntity<AssociadoDTO> salvarNovoAssociado(@RequestBody  @Valid AssociadoDTO associado, UriComponentsBuilder uriComponentsBuilder){
         AssociadoDTO associadoDTO = associadoService.salvaNovoAssociado(associado);
         URI uri = uriComponentsBuilder.path("/associados/{id}").buildAndExpand(associado.getId()).toUri();
         return ResponseEntity.created(uri).body(associadoDTO);

@@ -4,14 +4,24 @@ import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.entities.Associa
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.enums.CargoPolitico;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.enums.Sexo;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class AssociadoDTO {
     private Long id;
+
+    @NotNull @NotEmpty
     private String nome;
+
+    @NotNull
     private CargoPolitico cargoPolitico;
+
+    @NotNull @NotEmpty
     private String dataNascimento;
+
+    @NotNull
     private Sexo sexo;
 
     public AssociadoDTO(){};
