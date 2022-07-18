@@ -99,9 +99,9 @@ class PartidoServiceTest {
         //Dado
         Partido partido = new Partido(1L, "PartidoA", "PA", Ideologia.ESQUERDA, LocalDate.now());
         partidoRepository.save(partido);
-        PartidoDTO partidoDTO = new PartidoDTO("PartidoB", "PB", Ideologia.ESQUERDA, "15/07/2022");
+//        PartidoDTO partidoDTO = new PartidoDTO("PartidoB", "PB", Ideologia.ESQUERDA, "15/07/2022");
 
-        partidoService.atualizar(0L, partidoRepository, partidoDTO);
+//        partidoService.atualizar(0L, partidoRepository, partidoDTO);
 
         //Quando
         ArgumentCaptor<Partido> partidoArgumentCaptor = ArgumentCaptor.forClass(Partido.class);
@@ -164,7 +164,6 @@ class PartidoServiceTest {
         assertThat(associadosAoPartidoB.get(1)).isOfAnyClassIn(Associado.class);
 
         System.out.println(associadosAoPartidoA.size());
-
     }
 
     @Test
