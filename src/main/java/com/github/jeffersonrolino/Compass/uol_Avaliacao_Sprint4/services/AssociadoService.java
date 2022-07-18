@@ -25,6 +25,11 @@ public class AssociadoService {
     @Autowired
     private PartidoRepository partidoRepository;
 
+    public AssociadoService(AssociadoRepository associadoRepository, PartidoRepository partidoRepository) {
+        this.associadoRepository = associadoRepository;
+        this.partidoRepository = partidoRepository;
+    }
+
     public AssociadoDTO salvaNovoAssociado(AssociadoDTO associadoDTO){
         Associado associado = new Associado(associadoDTO);
         associadoRepository.save(associado);

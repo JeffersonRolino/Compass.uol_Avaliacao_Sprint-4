@@ -37,7 +37,14 @@ public class Partido {
         this.sigla = partidoDTO.getSigla();
         this.ideologia = partidoDTO.getIdeologia();
         this.dataFundacao = partidoDTO.formatarData(partidoDTO.getDataFundacao());
-        this.associados = new ArrayList<>();
+    }
+
+    public Partido(Long id, String nome, String sigla, Ideologia ideologia, LocalDate dataFundacao) {
+        this.id = id;
+        this.nome = nome;
+        this.sigla = sigla;
+        this.ideologia = ideologia;
+        this.dataFundacao = dataFundacao;
     }
 
     public Long getId() {

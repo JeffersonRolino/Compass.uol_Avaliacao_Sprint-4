@@ -16,16 +16,30 @@ import java.util.stream.Collectors;
 
 @Service
 public class PartidoService {
+
+    public PartidoService() {
+    }
+
+    public PartidoService(PartidoRepository partidoRepository, AssociadoRepository associadoRepository) {
+        this.partidoRepository = partidoRepository;
+        this.associadoRepository = associadoRepository;
+    }
+
     @Autowired
     private PartidoRepository partidoRepository;
 
     @Autowired
     private AssociadoRepository associadoRepository;
 
-    public PartidoDTO salvaNovoPartido(PartidoDTO partidoDTO){
-        Partido partidoDB = new Partido(partidoDTO);
-        Partido partidoSalvo = partidoRepository.save(partidoDB);
-        return new PartidoDTO(partidoSalvo);
+    public boolean salvaNovoPartido(PartidoDTO partidoDTO){
+        try{
+            Partido partido = new Partido(partidoDTO);
+            Partido partidoSalvo = partidoRepository.save(partido);
+            return true;
+        } catch (RuntimeException exception){
+            exception.printStackTrace();
+            return false;
+        }
     }
 
     public ResponseEntity<PartidoDTO> retornaPartidoPorId(Long id){

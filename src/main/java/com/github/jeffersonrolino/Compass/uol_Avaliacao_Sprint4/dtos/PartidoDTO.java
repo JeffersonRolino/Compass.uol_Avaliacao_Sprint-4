@@ -25,6 +25,13 @@ public class PartidoDTO {
 
     public PartidoDTO(){}
 
+    public PartidoDTO(String nome, String sigla, Ideologia ideologia, String dataFundacao) {
+        this.nome = nome;
+        this.sigla = sigla;
+        this.ideologia = ideologia;
+        this.dataFundacao = dataFundacao;
+    }
+
     public PartidoDTO(Partido partido) {
         this.id = partido.getId();
         this.nome = partido.getNome();

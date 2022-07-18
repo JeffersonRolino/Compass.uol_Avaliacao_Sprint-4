@@ -7,6 +7,7 @@ import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.enums.Ideologia;
 import com.github.jeffersonrolino.Compass.uol_Avaliacao_Sprint4.services.PartidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -23,10 +24,14 @@ public class PartidoController {
     private PartidoService partidoService;
 
     @PostMapping
-    public ResponseEntity<PartidoDTO> salvarNovoPartido(@RequestBody @Valid PartidoDTO partido, UriComponentsBuilder uriComponentsBuilder){
-        PartidoDTO partidoDTO = partidoService.salvaNovoPartido(partido);
-        URI uri = uriComponentsBuilder.path("/partidos/{id}").buildAndExpand(partido.getId()).toUri();
-        return ResponseEntity.created(uri).body(partidoDTO);
+    public ResponseEntity<String> salvarNovoPartido(@RequestBody @Valid PartidoDTO partido){
+        boolean salvo = partidoService.salvaNovoPartido(partido);
+
+        if(salvo){
+            return ResponseEntity.status(HttpStatus.CREATED).body("Partido Salvo com sucesso!");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Partido não foi salvo");
+        }
     }
 
     @GetMapping("/{id}")
